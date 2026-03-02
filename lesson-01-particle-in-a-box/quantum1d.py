@@ -29,6 +29,11 @@ BOHR_PER_ANGSTROM = 1.8897259886
 BOHR_PER_NM = 18.8973
 HARTREE_TO_EV = 27.211386245988
 
+# Consistent color palette for eigenstate plots — distinct, colorblind-friendly
+STATE_COLORS = ['#1f77b4', '#d62728', '#2ca02c', '#9467bd',
+                '#e377c2', '#ff7f0e', '#8c564b', '#17becf']
+STATE_LINESTYLES = ['-', '--', '-.', ':', '-', '--', '-.', ':']
+
 
 class QuantumSystem1D:
     """
@@ -134,24 +139,30 @@ class QuantumSystem1D:
             E = self.energies[i]
             phi = self.state_full(i)
             offset = E if offset_by_energy else 0
+            color = STATE_COLORS[i % len(STATE_COLORS)]
+            ls = STATE_LINESTYLES[i % len(STATE_LINESTYLES)]
 
-            ax1.plot(xf, phi + offset, label=f'n={i+1}, E={E:.4f} Ha')
+            ax1.plot(xf, phi + offset, color=color, linestyle=ls,
+                     linewidth=1.5, label=f'n={i+1}, E={E:.4f} Ha')
             ax1.axhline(y=offset, color='gray', linewidth=0.3)
 
-            ax2.plot(xf, phi**2 + offset, label=f'n={i+1}')
+            ax2.fill_between(xf, offset, phi**2 + offset,
+                             color=color, alpha=0.15)
+            ax2.plot(xf, phi**2 + offset, color=color, linestyle=ls,
+                     linewidth=1.5, label=f'n={i+1}')
             ax2.axhline(y=offset, color='gray', linewidth=0.3)
 
-        for ax, title, ylabel in [
-            (ax1, 'Wavefunctions', 'φ(x)'),
-            (ax2, 'Probability Densities', '|φ(x)|²'),
-        ]:
-            ax.set_xlabel('x (bohr)')
-            if offset_by_energy:
-                ax.set_ylabel(f'{ylabel} + E (hartree)')
-            else:
-                ax.set_ylabel(ylabel)
-            ax.set_title(title)
-            ax.legend(fontsize=8)
+        ax1.set_xlabel('x (bohr)')
+        ax1.set_ylabel('$\\phi(x)$ + E (hartree)' if offset_by_energy
+                        else '$\\phi(x)$')
+        ax1.set_title('Wavefunctions')
+        ax1.legend(fontsize=8)
+
+        ax2.set_xlabel('x (bohr)')
+        ax2.set_ylabel('$|\\phi(x)|^2$ + E' if offset_by_energy
+                        else '$|\\phi(x)|^2$')
+        ax2.set_title('Probability Densities')
+        ax2.legend(fontsize=8)
 
         plt.tight_layout()
         if save_path:

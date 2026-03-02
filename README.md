@@ -25,19 +25,20 @@ models and produce physically meaningful numerical results.
 
 | Lesson | Topic | Key Skills |
 |--------|-------|------------|
+| 00 | [Welcome & Overview](lesson-00-introduction/) | Course philosophy, PySCF overview, environment setup |
 | 01 | [Particle in a 1D Box](lesson-01-particle-in-a-box/) | Schrödinger equation, discretization, eigenvalue problems, units |
 
 ## Requirements
 
 - Python 3.8+
-- NumPy, SciPy, Matplotlib
+- NumPy, SciPy, Matplotlib, [PySCF](https://pyscf.org/), py3Dmol
 
 ```bash
-pip install numpy scipy matplotlib
+conda install -c conda-forge numpy scipy matplotlib pyscf py3dmol geometric jupyterlab -y
 ```
 
-Future lessons will introduce [PySCF](https://pyscf.org/) for molecular quantum
-chemistry calculations.
+See [Lesson 00](lesson-00-introduction/) for detailed environment setup
+instructions (conda recommended).
 
 ## License
 

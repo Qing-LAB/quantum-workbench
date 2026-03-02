@@ -1,3 +1,6 @@
 numpy>=1.20
 scipy>=1.7
 matplotlib>=3.4
+pyscf>=2.0
+py3Dmol>=2.0
+geometric>=1.0
