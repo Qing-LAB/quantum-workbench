@@ -27,6 +27,7 @@ models and produce physically meaningful numerical results.
 |--------|-------|------------|
 | 00 | [Welcome & Overview](lesson-00-introduction/) | Course philosophy, PySCF overview, environment setup |
 | 01 | [Particle in a 1D Box](lesson-01-particle-in-a-box/) | Schrödinger equation, discretization, eigenvalue problems, units |
+| 02 | [The Harmonic Oscillator](lesson-02-harmonic-oscillator/) | Ladder operators, Hermite polynomials, classical limit, perturbation theory |
 
 ## Requirements
 
