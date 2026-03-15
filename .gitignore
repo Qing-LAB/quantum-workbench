@@ -10,3 +10,6 @@ __pycache__/
 
 # Virtual environments
 .virtual_documents/
+
+# Draft/working materials
+draft_materials/
